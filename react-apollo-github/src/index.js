@@ -5,10 +5,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
+import { ApolloProvider } from 'react-apollo';
 
 
 const client = new ApolloClient({
-    uri: 'https//api/.github.com/graphql',
+    uri: 'https://api.github.com/graphql',
     request: operation => {
         operation.setContext({
             headers: {
@@ -42,5 +43,9 @@ client.query({
     query
 }).then(result => console.log(result));
 
-ReactDOM.render( < App / > , document.getElementById('root'));
+ReactDOM.render( 
+    <ApolloProvider client={client}>
+        <App />
+    </ApolloProvider>
+    , document.getEzlementById('root'));
 registerServiceWorker();
